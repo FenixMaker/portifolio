@@ -3,7 +3,8 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Youtube, Twitch } from "lucide-react"
+import { Youtube, Twitch, Instagram } from "lucide-react"
+import TikTokIcon from "@/components/icons/tiktok-icon"
 
 export default function AboutPage() {
   const skills = [
@@ -84,6 +85,16 @@ export default function AboutPage() {
                   <Link href="https://www.twitch.tv/fenixposts" target="_blank" rel="noopener noreferrer">
                     <Button variant="outline" className="border-zinc-700 bg-zinc-800/50 hover:bg-zinc-800 text-white">
                       <Twitch className="mr-2 h-4 w-4" /> Siga na Twitch
+                    </Button>
+                  </Link>
+                  <Link href="https://www.tiktok.com/@fenixposts" target="_blank" rel="noopener noreferrer">
+                    <Button variant="outline" className="border-zinc-700 bg-zinc-800/50 hover:bg-zinc-800 text-white">
+                      <TikTokIcon className="mr-2 h-4 w-4" /> Siga no TikTok
+                    </Button>
+                  </Link>
+                  <Link href="https://www.instagram.com/fenixposts" target="_blank" rel="noopener noreferrer">
+                    <Button variant="outline" className="border-zinc-700 bg-zinc-800/50 hover:bg-zinc-800 text-white">
+                      <Instagram className="mr-2 h-4 w-4" /> Siga no Instagram
                     </Button>
                   </Link>
                 </div>
@@ -179,6 +190,22 @@ export default function AboutPage() {
             className="text-zinc-400 hover:text-purple-500 transition-colors"
           >
             <Twitch className="h-5 w-5" />
+          </Link>
+          <Link
+            href="https://www.tiktok.com/@fenixposts"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-zinc-400 hover:text-cyan-400 transition-colors"
+          >
+            <TikTokIcon className="h-5 w-5" />
+          </Link>
+          <Link
+            href="https://www.instagram.com/fenixposts"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-zinc-400 hover:text-pink-500 transition-colors"
+          >
+            <Instagram className="h-5 w-5" />
           </Link>
         </div>
       </footer>

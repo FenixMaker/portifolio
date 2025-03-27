@@ -16,13 +16,14 @@ export function FeaturedVideos() {
     title: "",
   })
 
-  const [videos, setVideos] = useState<any[]>([])
+  const [youtubeVideos, setYoutubeVideos] = useState<any[]>([])
+  const [tiktokVideos, setTiktokVideos] = useState<any[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [usingFallback, setUsingFallback] = useState(false)
   
   // Atualizado para incluir três opções
-  const [activeTab, setActiveTab] = useState("recentes")
+  const [activeTab, setActiveTab] = useState("youtube") // Adicionado estado para alternar abas
 
   useEffect(() => {
     async function fetchVideos() {
@@ -31,31 +32,36 @@ export function FeaturedVideos() {
         setError(null)
         setUsingFallback(false)
 
-        // Usar o ID do canal fornecido
-        const response = await fetch("/api/youtube?channelId=UCzb-8Ly6KmZOMbpQCDYJs_g&maxResults=6")
+        const youtubeResponse = await fetch("/api/youtube?channelId=UCzb-8Ly6KmZOMbpQCDYJs_g&maxResults=6")
+        const tiktokResponse = await fetch("/api/tiktok?username=fenixposts")
 
-        if (!response.ok) {
-          throw new Error("Falha ao buscar vídeos")
-        }
+        if (youtubeResponse.ok && tiktokResponse.ok) {
+          const youtubeData = await youtubeResponse.json()
+          const tiktokData = await tiktokResponse.json()
 
-        const data = await response.json()
+          if (youtubeData.success && youtubeData.data.length > 0) {
+            const processedYoutubeVideos = youtubeData.data.map((video: any) => ({
+              ...video,
+              date: video.publishedAt ? timeAgo(video.publishedAt) : "",
+            }))
+            setYoutubeVideos(processedYoutubeVideos)
+          } else {
+            throw new Error("Nenhum vídeo do YouTube encontrado")
+          }
 
-        if (data.success && data.data.length > 0) {
-          // Guarde o publishedAt original e processe a data para exibição
-          const processedVideos = data.data.map((video: any) => ({
-            ...video,
-            date: video.publishedAt ? timeAgo(video.publishedAt) : "",
-          }))
+          if (tiktokData.success && tiktokData.data.length > 0) {
+            setTiktokVideos(tiktokData.data)
+          } else {
+            throw new Error("Nenhum vídeo do TikTok encontrado")
+          }
 
-          setVideos(processedVideos)
-
-          if (data.message) {
-            console.log(data.message)
+          if (youtubeData.message) {
+            console.log(youtubeData.message)
             setUsingFallback(true)
             setError("Usando dados de exemplo. Para ver seus vídeos reais, verifique a chave de API do YouTube.")
           }
         } else {
-          throw new Error("Nenhum vídeo encontrado")
+          throw new Error("Falha ao buscar vídeos")
         }
       } catch (error) {
         console.error("Erro ao buscar vídeos:", error)
@@ -63,7 +69,7 @@ export function FeaturedVideos() {
         setUsingFallback(true)
 
         // Usar dados de exemplo em caso de erro
-        setVideos([
+        setYoutubeVideos([
           {
             id: 1,
             title: "COMPILADO DE MELHORES MOMENTOS DAS LIVES",
@@ -133,53 +139,49 @@ export function FeaturedVideos() {
   }
   
   // Separação dos vídeos em shorts e longos
-  const shortVideos = videos.filter(isShort);
-  const longVideos = videos.filter(video => !isShort(video));
+  const shortVideos = youtubeVideos.filter(isShort);
+  const longVideos = youtubeVideos.filter(video => !isShort(video));
   
   // Todos os vídeos ordenados por data de publicação (mais recentes primeiro)
-  const recentVideos = [...videos].sort(
+  const recentVideos = [...youtubeVideos].sort(
     (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
   ).slice(0, 6) // Limitar aos 6 mais recentes
 
   // Remover o debug code que estava causando problemas
   useEffect(() => {
-    if (!loading && videos.length > 0) {
+    if (!loading && youtubeVideos.length > 0) {
       console.log("Distribuição de vídeos:");
-      console.log("Total de vídeos:", videos.length);
+      console.log("Total de vídeos:", youtubeVideos.length);
       console.log("Vídeos curtos/shorts:", shortVideos.length);
       console.log("Vídeos longos:", longVideos.length);
     }
-  }, [videos, loading]);
+  }, [youtubeVideos, loading]);
   
+  const videosToDisplay = activeTab === "youtube" ? youtubeVideos : tiktokVideos
+
   return (
     <section className="w-full py-12 md:py-24 lg:py-32 bg-gradient-to-b from-zinc-950 to-zinc-900">
       <div className="container px-4 md:px-6">
         <div className="text-center mb-10">
           <h2 className="text-2xl font-bold tracking-tight text-white md:text-3xl">Meu Conteúdo</h2>
           <p className="mt-3 text-zinc-400 max-w-2xl mx-auto">
-            Confira meus vídeos organizados por categoria. Selecione uma opção abaixo para filtrar o conteúdo.
+            Confira meus vídeos organizados por plataforma. Selecione uma opção abaixo para filtrar o conteúdo.
           </p>
         </div>
         
         {/* Navegação de abas atualizada */}
         <div className="flex flex-wrap justify-center mb-10">
           <button
-            onClick={() => setActiveTab("recentes")}
-            className={`px-4 py-2 mx-2 my-1 rounded ${activeTab === "recentes" ? "bg-red-500 text-white" : "bg-zinc-800 text-zinc-400"}`}
+            onClick={() => setActiveTab("youtube")}
+            className={`px-4 py-2 mx-2 my-1 rounded ${activeTab === "youtube" ? "bg-red-500 text-white" : "bg-zinc-800 text-zinc-400"}`}
           >
-            Vídeos Mais Recentes
+            YouTube
           </button>
           <button
-            onClick={() => setActiveTab("longos")}
-            className={`px-4 py-2 mx-2 my-1 rounded ${activeTab === "longos" ? "bg-red-500 text-white" : "bg-zinc-800 text-zinc-400"}`}
+            onClick={() => setActiveTab("tiktok")}
+            className={`px-4 py-2 mx-2 my-1 rounded ${activeTab === "tiktok" ? "bg-cyan-500 text-white" : "bg-zinc-800 text-zinc-400"}`}
           >
-            Vídeos Longos
-          </button>
-          <button
-            onClick={() => setActiveTab("curtos")}
-            className={`px-4 py-2 mx-2 my-1 rounded ${activeTab === "curtos" ? "bg-red-500 text-white" : "bg-zinc-800 text-zinc-400"}`}
-          >
-            Vídeos Curtos
+            TikTok
           </button>
         </div>
         
@@ -203,7 +205,7 @@ export function FeaturedVideos() {
             </div>
             
             {/* Renderização condicional com base na aba selecionada */}
-            {activeTab === "recentes" && recentVideos.length > 0 ? (
+            {activeTab === "youtube" && recentVideos.length > 0 ? (
               <div className="mx-auto grid max-w-5xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 {recentVideos.map((video, index) => (
                   <VideoCard key={video.id} video={video} onPlay={openVideoModal} index={index} />

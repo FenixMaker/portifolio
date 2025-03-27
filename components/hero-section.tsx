@@ -4,7 +4,8 @@ import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import { ArrowRight, Youtube } from "lucide-react"
+import { ArrowRight, Youtube, Twitch, Instagram } from "lucide-react"
+import TikTokIcon from "./icons/tiktok-icon"
 import { Button } from "@/components/ui/button"
 
 export function HeroSection() {
@@ -134,6 +135,45 @@ export function HeroSection() {
                 Mais de <span className="font-bold text-white">3.87K</span> inscritos
               </p>
             </div>
+            <motion.div
+              className="flex gap-4 mt-2"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6, duration: 0.5 }}
+            >
+              <Link
+                href="https://www.youtube.com/@FenixPosts"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-zinc-400 hover:text-red-500 transition-colors"
+              >
+                <Youtube className="h-6 w-6" />
+              </Link>
+              <Link
+                href="https://www.twitch.tv/fenixposts"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-zinc-400 hover:text-purple-500 transition-colors"
+              >
+                <Twitch className="h-6 w-6" />
+              </Link>
+              <Link
+                href="https://www.tiktok.com/@fenixposts"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-zinc-400 hover:text-cyan-400 transition-colors"
+              >
+                <TikTokIcon className="h-6 w-6" />
+              </Link>
+              <Link
+                href="https://www.instagram.com/fenixposts"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-zinc-400 hover:text-pink-500 transition-colors"
+              >
+                <Instagram className="h-6 w-6" />
+              </Link>
+            </motion.div>
           </motion.div>
           <motion.div
             className="flex items-center justify-center"

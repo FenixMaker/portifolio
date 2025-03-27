@@ -1,7 +1,9 @@
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Mail, Send, Youtube, Twitch } from "lucide-react"
+import { Mail, Send, Youtube, Twitch, Instagram } from "lucide-react"
+import TikTokIcon from "./icons/tiktok-icon"
 
 export function ContactSection() {
   return (
@@ -41,17 +43,42 @@ export function ContactSection() {
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <Twitch className="h-6 w-6 text-red-500" />
+              <Twitch className="h-6 w-6 text-purple-500" />
               <div>
                 <h3 className="font-medium text-white">Twitch</h3>
-                <a
+                <Link
+                  className="text-sm text-zinc-400 underline-offset-2 hover:text-purple-500 hover:underline"
                   href="https://www.twitch.tv/fenixposts"
                   target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm text-zinc-400 hover:text-purple-500 transition-colors"
                 >
                   twitch.tv/fenixposts
-                </a>
+                </Link>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <TikTokIcon className="h-6 w-6 text-cyan-400" />
+              <div>
+                <h3 className="font-medium text-white">TikTok</h3>
+                <Link
+                  className="text-sm text-zinc-400 underline-offset-2 hover:text-cyan-400 hover:underline"
+                  href="https://www.tiktok.com/@fenixposts"
+                  target="_blank"
+                >
+                  tiktok.com/@fenixposts
+                </Link>
+              </div>
+            </div>
+            <div className="flex items-center gap-3">
+              <Instagram className="h-6 w-6 text-pink-500" />
+              <div>
+                <h3 className="font-medium text-white">Instagram</h3>
+                <Link
+                  className="text-sm text-zinc-400 underline-offset-2 hover:text-pink-500 hover:underline"
+                  href="https://www.instagram.com/fenixposts"
+                  target="_blank"
+                >
+                  instagram.com/fenixposts
+                </Link>
               </div>
             </div>
             <div className="pt-4">
@@ -65,6 +92,48 @@ export function ContactSection() {
                   <p className="text-2xl font-bold text-white">395</p>
                   <p className="text-sm text-zinc-400">Vídeos</p>
                 </div>
+              </div>
+              <div className="flex justify-start gap-4 mt-4">
+                <Link
+                  href="https://www.youtube.com/@FenixPosts"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button variant="outline" size="icon" className="rounded-full border-zinc-800">
+                    <Youtube className="h-4 w-4 text-red-500" />
+                    <span className="sr-only">YouTube</span>
+                  </Button>
+                </Link>
+                <Link
+                  href="https://www.twitch.tv/fenixposts"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button variant="outline" size="icon" className="rounded-full border-zinc-800">
+                    <Twitch className="h-4 w-4 text-purple-500" />
+                    <span className="sr-only">Twitch</span>
+                  </Button>
+                </Link>
+                <Link
+                  href="https://www.tiktok.com/@fenixposts"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button variant="outline" size="icon" className="rounded-full border-zinc-800">
+                    <TikTokIcon className="h-4 w-4 text-cyan-400" />
+                    <span className="sr-only">TikTok</span>
+                  </Button>
+                </Link>
+                <Link
+                  href="https://www.instagram.com/fenixposts"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button variant="outline" size="icon" className="rounded-full border-zinc-800">
+                    <Instagram className="h-4 w-4 text-pink-500" />
+                    <span className="sr-only">Instagram</span>
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
@@ -101,7 +170,10 @@ export function ContactSection() {
                   placeholder="Mensagem"
                 />
               </div>
-              <Button className="w-full bg-red-600 hover:bg-red-700 text-white" type="submit">
+              <Button 
+                className="w-full bg-gradient-to-r from-red-500 via-orange-500 to-purple-600 hover:from-red-600 hover:via-orange-600 hover:to-purple-700 text-white" 
+                type="submit"
+              >
                 <Send className="mr-2 h-4 w-4" /> Enviar Mensagem
               </Button>
             </form>

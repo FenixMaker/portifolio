@@ -1,6 +1,7 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Twitch, Youtube } from "lucide-react"
+import { Twitch, Youtube, Instagram } from "lucide-react"
+import TikTokIcon from "@/components/icons/tiktok-icon"
 import { FeaturedVideos } from "@/components/featured-videos"
 import { HeroSection } from "@/components/hero-section"
 import { ServicesSection } from "@/components/services-section"
@@ -53,6 +54,22 @@ export default function Home() {
             className="text-zinc-400 hover:text-purple-500 transition-colors"
           >
             <Twitch className="h-5 w-5" />
+          </Link>
+          <Link
+            href="https://www.tiktok.com/@fenixposts"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-zinc-400 hover:text-cyan-400 transition-colors"
+          >
+            <TikTokIcon className="h-5 w-5" />
+          </Link>
+          <Link
+            href="https://www.instagram.com/fenixposts"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-zinc-400 hover:text-pink-500 transition-colors"
+          >
+            <Instagram className="h-5 w-5" />
           </Link>
         </div>
       </footer>

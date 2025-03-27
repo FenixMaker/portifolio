@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Mail, Send, Youtube, Twitch, Instagram, Twitter } from "lucide-react"
+import TikTokIcon from "@/components/icons/tiktok-icon"
 
 export default function ContactPage() {
   return (
@@ -78,37 +79,68 @@ export default function ContactPage() {
                     </a>
                   </div>
                 </div>
+                <div className="flex items-center gap-3">
+                  <Instagram className="h-6 w-6 text-red-500" />
+                  <div>
+                    <h3 className="font-medium text-white">Instagram</h3>
+                    <a
+                      href="https://www.instagram.com/fenixposts"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-zinc-400 hover:text-pink-500 transition-colors"
+                    >
+                      instagram.com/fenixposts
+                    </a>
+                  </div>
+                </div>
                 <div className="pt-4">
                   <h3 className="font-medium text-white mb-3">Redes Sociais</h3>
                   <div className="flex gap-4">
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      className="border-zinc-700 bg-zinc-800/50 hover:bg-zinc-800 text-white"
-                    >
-                      <Youtube className="h-5 w-5 text-red-500" />
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      className="border-zinc-700 bg-zinc-800/50 hover:bg-zinc-800 text-white"
-                    >
-                      <Twitch className="h-5 w-5 text-purple-500" />
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      className="border-zinc-700 bg-zinc-800/50 hover:bg-zinc-800 text-white"
-                    >
-                      <Instagram className="h-5 w-5 text-pink-500" />
-                    </Button>
-                    <Button
-                      variant="outline"
-                      size="icon"
-                      className="border-zinc-700 bg-zinc-800/50 hover:bg-zinc-800 text-white"
-                    >
-                      <Twitter className="h-5 w-5 text-blue-400" />
-                    </Button>
+                    <Link href="https://www.youtube.com/@FenixPosts" target="_blank" rel="noopener noreferrer">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="border-zinc-700 bg-zinc-800/50 hover:bg-zinc-800 text-white"
+                      >
+                        <Youtube className="h-5 w-5 text-red-500" />
+                      </Button>
+                    </Link>
+                    <Link href="https://www.twitch.tv/fenixposts" target="_blank" rel="noopener noreferrer">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="border-zinc-700 bg-zinc-800/50 hover:bg-zinc-800 text-white"
+                      >
+                        <Twitch className="h-5 w-5 text-purple-500" />
+                      </Button>
+                    </Link>
+                    <Link href="https://www.tiktok.com/@fenixposts" target="_blank" rel="noopener noreferrer">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="border-zinc-700 bg-zinc-800/50 hover:bg-zinc-800 text-white"
+                      >
+                        <TikTokIcon className="h-5 w-5 text-cyan-400" />
+                      </Button>
+                    </Link>
+                    <Link href="https://www.instagram.com/fenixposts" target="_blank" rel="noopener noreferrer">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="border-zinc-700 bg-zinc-800/50 hover:bg-zinc-800 text-white"
+                      >
+                        <Instagram className="h-5 w-5 text-pink-500" />
+                      </Button>
+                    </Link>
+                    <Link href="https://twitter.com/fenixposts" target="_blank" rel="noopener noreferrer">
+                      <Button
+                        variant="outline"
+                        size="icon"
+                        className="border-zinc-700 bg-zinc-800/50 hover:bg-zinc-800 text-white"
+                      >
+                        <Twitter className="h-5 w-5 text-blue-400" />
+                      </Button>
+                    </Link>
                   </div>
                 </div>
               </div>
@@ -175,6 +207,22 @@ export default function ContactPage() {
             className="text-zinc-400 hover:text-purple-500 transition-colors"
           >
             <Twitch className="h-5 w-5" />
+          </Link>
+          <Link
+            href="https://www.tiktok.com/@fenixposts"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-zinc-400 hover:text-cyan-400 transition-colors"
+          >
+            <TikTokIcon className="h-5 w-5" />
+          </Link>
+          <Link
+            href="https://www.instagram.com/fenixposts"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-zinc-400 hover:text-pink-500 transition-colors"
+          >
+            <Instagram className="h-5 w-5" />
           </Link>
         </div>
       </footer>

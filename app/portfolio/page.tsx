@@ -5,7 +5,8 @@ import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { Youtube, Twitch, Filter, Loader2, AlertTriangle } from "lucide-react"
+import { Youtube, Twitch, Filter, Loader2, AlertTriangle, Instagram } from "lucide-react"
+import TikTokIcon from "@/components/icons/tiktok-icon"
 import { VideoModal } from "@/components/video-modal"
 import { VideoCard } from "@/components/video-card"
 import { motion, AnimatePresence } from "framer-motion"
@@ -207,6 +208,40 @@ export default function Portfolio() {
             Contato
           </Link>
         </nav>
+        <nav className="flex gap-4">
+          <Link
+            href="https://www.youtube.com/@FenixPosts"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-zinc-400 hover:text-red-500 transition-colors"
+          >
+            <Youtube className="h-5 w-5" />
+          </Link>
+          <Link
+            href="https://www.twitch.tv/fenixposts"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-zinc-400 hover:text-purple-500 transition-colors"
+          >
+            <Twitch className="h-5 w-5" />
+          </Link>
+          <Link
+            href="https://www.tiktok.com/@fenixposts"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-zinc-400 hover:text-cyan-400 transition-colors"
+          >
+            <TikTokIcon className="h-5 w-5" />
+          </Link>
+          <Link
+            href="https://www.instagram.com/fenixposts"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-zinc-400 hover:text-pink-500 transition-colors"
+          >
+            <Instagram className="h-5 w-5" />
+          </Link>
+        </nav>
       </header>
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32">
@@ -342,6 +377,22 @@ export default function Portfolio() {
             className="text-zinc-400 hover:text-purple-500 transition-colors"
           >
             <Twitch className="h-5 w-5" />
+          </Link>
+          <Link
+            href="https://www.tiktok.com/@fenixposts"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-zinc-400 hover:text-cyan-400 transition-colors"
+          >
+            <TikTokIcon className="h-5 w-5" />
+          </Link>
+          <Link
+            href="https://www.instagram.com/fenixposts"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-zinc-400 hover:text-pink-500 transition-colors"
+          >
+            <Instagram className="h-5 w-5" />
           </Link>
         </div>
       </footer>
