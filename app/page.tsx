@@ -12,7 +12,7 @@ export default function Home() {
       <header className="px-4 lg:px-6 h-16 flex items-center justify-between border-b border-zinc-800">
         <Link className="flex items-center justify-center gap-2" href="/">
           <Image src="/images/logo.png" alt="Fenix Posts Logo" width={32} height={32} />
-          <span className="font-bold text-xl">Fenix Posts</span>
+          <span className="font-bold text-xl"></span>
         </Link>
         <nav className="flex gap-6">
           <Link className="text-sm font-medium hover:text-red-500 transition-colors" href="/">
