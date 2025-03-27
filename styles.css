@@ -1,0 +1,54 @@
+.icon-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: transparent;
+    transition: transform 0.2s ease;
+}
+
+.icon-button:hover {
+    transform: scale(1.1);
+}
+
+.icon-button.youtube {
+    color: #FF0000;
+}
+
+.icon-button.youtube:hover {
+    color: #CC0000;
+}
+
+.icon-button.tiktok {
+    color: #00F2EA;
+}
+
+.icon-button.tiktok:hover {
+    color: #00D2C8;
+}
+
+.icon-button svg {
+    width: 24px;
+    height: 24px;
+}
+
+/* Animação para o ícone do TikTok */
+@keyframes tiktok-pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.icon-button.tiktok:hover svg {
+    animation: tiktok-pulse 0.8s infinite;
+}

@@ -94,7 +94,7 @@ export function HeroSection() {
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
                 <Link
-                  href="https://www.youtube.com/channel/UCzb-8Ly6KmZOMbpQCDYJs_g"
+                  href="https://www.youtube.com/watch?v=CTeETwrKOGk&ab"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

@@ -153,7 +153,7 @@ export default function Portfolio() {
           },
         ])
 
-        setCategories(["Todos", "Minecraft", "Tutoriais", "Compilações", "Shorts", "Lives"])
+        setCategories(["Todos", "Minecraft", "Tutoriais", "Compilações", "Lives"])
       } finally {
         setLoading(false)
       }
@@ -244,23 +244,72 @@ export default function Portfolio() {
         </nav>
       </header>
       <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32">
+        <section className="py-12">
           <div className="container px-4 md:px-6">
-            <motion.div
-              className="flex flex-col items-center justify-center space-y-4 text-center"
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="space-y-2">
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-orange-500 to-purple-600">
+            <div className="flex flex-col md:flex-row items-center md:items-start justify-between mb-8 gap-4">
+              <div>
+                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl mb-2">
                   Meu Portfólio
                 </h1>
-                <p className="max-w-[900px] text-zinc-400 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed">
-                  Confira meus trabalhos em edição de vídeo para Minecraft e outros jogos
+                <p className="text-zinc-400 max-w-[700px]">
+                  Conheça meus melhores trabalhos em vídeos para YouTube e TikTok
                 </p>
               </div>
-            </motion.div>
+              
+              <div className="flex flex-wrap items-center gap-4 mt-4 md:mt-0">
+                <Button
+                  onClick={() => setShowFilter(!showFilter)}
+                  variant="outline"
+                  className="border-zinc-700 hover:border-zinc-600 text-zinc-400 hover:text-zinc-300"
+                >
+                  <Filter className="h-4 w-4 mr-2" />
+                  Filtrar
+                </Button>
+              </div>
+            </div>
+
+            {/* Filtro de categorias */}
+            <AnimatePresence>
+              {showFilter && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: "auto" }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="overflow-hidden mb-8"
+                >
+                  <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-4">
+                    <div className="flex flex-wrap gap-2">
+                      {categories.map((category) => (
+                        <Badge
+                          key={category}
+                          variant={activeCategory === category ? "default" : "outline"}
+                          className={`cursor-pointer transition-colors ${
+                            activeCategory === category 
+                              ? "bg-red-500 hover:bg-red-600 text-white" 
+                              : "bg-transparent hover:bg-zinc-800 text-zinc-400"
+                          }`}
+                          onClick={() => setActiveCategory(category)}
+                        >
+                          {category === "Todos" && "Todos"}
+                          {category === "YouTube" && (
+                            <span className="flex items-center gap-1">
+                              <Youtube className="h-3 w-3" /> YouTube
+                            </span>
+                          )}
+                          {category === "TikTok" && (
+                            <span className="flex items-center gap-1">
+                              <TikTokIcon className="h-3 w-3" /> TikTok
+                            </span>
+                          )}
+                          {category !== "Todos" && category !== "YouTube" && category !== "TikTok" && category}
+                        </Badge>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
 
             {error && (
               <div className="flex items-center justify-center gap-2 text-amber-400 text-center mt-4 mb-2 text-sm bg-amber-950/30 p-2 rounded-md">
@@ -268,47 +317,6 @@ export default function Portfolio() {
                 <span>{error}</span>
               </div>
             )}
-
-            <div className="relative mt-8">
-              <div className="flex items-center justify-between mb-4">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="border-zinc-700 bg-zinc-800/50 hover:bg-zinc-800 text-white flex items-center gap-2"
-                  onClick={() => setShowFilter(!showFilter)}
-                >
-                  <Filter className="h-4 w-4" /> Filtrar
-                </Button>
-                <p className="text-sm text-zinc-400">{filteredVideos.length} vídeos encontrados</p>
-              </div>
-
-              <AnimatePresence>
-                {showFilter && (
-                  <motion.div
-                    className="flex flex-wrap items-center justify-center gap-2 mb-8"
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {categories.map((category, index) => (
-                      <Badge
-                        key={index}
-                        variant={category === activeCategory ? "default" : "outline"}
-                        className={`cursor-pointer ${
-                          category === activeCategory
-                            ? "bg-gradient-to-r from-red-500 via-orange-500 to-purple-600 hover:from-red-600 hover:via-orange-600 hover:to-purple-700"
-                            : "hover:bg-zinc-800 border-zinc-700"
-                        }`}
-                        onClick={() => setActiveCategory(category)}
-                      >
-                        {category}
-                      </Badge>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
 
             {loading ? (
               <div className="flex justify-center items-center h-64">

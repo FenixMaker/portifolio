@@ -92,3 +92,48 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Estilos para os ícones das plataformas */
+.platform-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.platform-icon:hover {
+  transform: scale(1.1);
+}
+
+.platform-icon.youtube {
+  color: #FF0000;
+}
+
+.platform-icon.youtube:hover {
+  color: #CC0000;
+}
+
+.platform-icon.tiktok {
+  color: #00F2EA;
+}
+
+.platform-icon.tiktok:hover {
+  color: #00D2C8;
+}
+
+/* Animação para o ícone do TikTok */
+@keyframes tiktok-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.platform-icon.tiktok:hover svg {
+  animation: tiktok-pulse 0.8s infinite;
+}
