@@ -8,7 +8,7 @@ import { ArrowRight, Youtube } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 export function HeroSection() {
-  const [latestVideoId, setLatestVideoId] = useState("dQw4w9WgXcQ") // Vídeo padrão como fallback
+  const [latestVideoId, setLatestVideoId] = useState("CTeETwrKOGk") // Vídeo padrão como fallback
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
