@@ -93,11 +93,7 @@ export function HeroSection() {
                 </Link>
               </motion.div>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Link
-                  href="https://www.youtube.com/watch?v=CTeETwrKOGk&ab"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <Link href="https://www.youtube.com/watch?v=CTeETwrKOGk&ab" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" className="border-zinc-700 bg-zinc-800/50 hover:bg-zinc-800 text-white">
                     <Youtube className="mr-2 h-4 w-4" /> Canal no YouTube
                   </Button>

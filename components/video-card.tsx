@@ -19,6 +19,7 @@ interface VideoCardProps {
     category: string
     date?: string
     videoId: string
+    isShort?: boolean
   }
   onPlay: (videoId: string, title: string) => void
   index: number
@@ -34,20 +35,22 @@ export function VideoCard({ video, onPlay, index }: VideoCardProps) {
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
       <Card
-        className="overflow-hidden bg-zinc-900 border-zinc-800 hover:border-red-500/50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-red-500/10"
+        className={`overflow-hidden bg-zinc-900 border-zinc-800 hover:border-red-500/50 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-lg hover:shadow-red-500/10 ${
+          video.isShort ? "max-w-[240px] mx-auto" : "w-full"
+        }`}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
         <div
-          className="relative aspect-video overflow-hidden cursor-pointer"
+          className={`relative overflow-hidden cursor-pointer ${video.isShort ? "aspect-[9/16]" : "aspect-video"}`}
           onClick={() => onPlay(video.videoId, video.title)}
         >
           <Image
             src={video.thumbnail || "/placeholder.svg?height=400&width=600"}
             alt={video.title}
-            width={600}
-            height={400}
-            className={`object-cover transition-transform duration-700 ${isHovered ? "scale-110" : "scale-100"}`}
+            width={video.isShort ? 240 : 600}
+            height={video.isShort ? 426 : 400}
+            className={`object-cover w-full h-full transition-transform duration-700 ${isHovered ? "scale-110" : "scale-100"}`}
           />
           <div
             className={`absolute inset-0 flex items-center justify-center transition-opacity duration-300 bg-black/60 ${isHovered ? "opacity-100" : "opacity-0"}`}
@@ -63,11 +66,16 @@ export function VideoCard({ video, onPlay, index }: VideoCardProps) {
           <div className="absolute top-2 right-2">
             <span className="px-2 py-1 text-xs font-medium bg-red-500 text-white rounded-full">{video.category}</span>
           </div>
+          {video.isShort && (
+            <div className="absolute bottom-2 right-2">
+              <span className="px-2 py-1 text-xs font-medium bg-red-500 text-white rounded-full">Short</span>
+            </div>
+          )}
         </div>
         <CardContent className="p-4">
           <div className="space-y-2">
             <h3
-              className="font-bold line-clamp-2 cursor-pointer hover:text-red-500 transition-colors"
+              className="font-bold line-clamp-2 cursor-pointer hover:text-red-500 transition-colors text-white"
               onClick={() => onPlay(video.videoId, video.title)}
             >
               {video.title}

@@ -49,3 +49,4 @@ export function SocialIcons({ className = "", iconSize = 5 }: SocialIconsProps) 
     </div>
   )
 }
+

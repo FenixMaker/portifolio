@@ -1,5 +1,5 @@
 // Função para buscar vídeos do canal do YouTube
-export async function fetchYoutubeVideos(channelId: string, maxResults = 9) {
+export async function fetchYoutubeVideos(channelId: string, maxResults = 12) {
   // Usar a chave de API do YouTube da variável de ambiente
   const API_KEY = process.env.YOUTUBE_API_KEY
 
@@ -90,6 +90,12 @@ export async function fetchYoutubeVideos(channelId: string, maxResults = 9) {
       const snippet = item.snippet
       const videoId = item.contentDetails.videoId
 
+      // Melhorar a detecção de shorts
+      const isShort =
+        snippet.title.toLowerCase().includes("#shorts") ||
+        snippet.description.toLowerCase().includes("#shorts") ||
+        (snippet.title.startsWith("#") && snippet.title.length < 30)
+
       return {
         id: videoId,
         title: snippet.title,
@@ -97,6 +103,9 @@ export async function fetchYoutubeVideos(channelId: string, maxResults = 9) {
         thumbnail: snippet.thumbnails.high?.url || snippet.thumbnails.default?.url,
         publishedAt: snippet.publishedAt,
         videoId: videoId,
+        isShort: isShort,
+        thumbnailWidth: snippet.thumbnails.high?.width || snippet.thumbnails.default?.width,
+        thumbnailHeight: snippet.thumbnails.high?.height || snippet.thumbnails.default?.height,
       }
     })
 
@@ -136,18 +145,35 @@ export async function fetchYoutubeVideos(channelId: string, maxResults = 9) {
 function getCategoryFromVideo(title: string, description: string) {
   const content = (title + " " + description).toLowerCase()
 
-  if (content.includes("tutorial") || content.includes("como fazer") || content.includes("aprenda")) {
-    return "Tutoriais"
+  if (content.includes("#shorts")) {
+    return "Shorts"
+  } else if (
+    content.includes("tutorial") ||
+    content.includes("como fazer") ||
+    content.includes("aprenda") ||
+    content.includes("dica")
+  ) {
+    return "Tutorial"
   } else if (content.includes("live") || content.includes("ao vivo") || content.includes("stream")) {
-    return "Lives"
+    return "Live"
   } else if (
     content.includes("compilação") ||
     content.includes("melhores momentos") ||
     content.includes("highlights")
   ) {
-    return "Compilações"
-  } else if (content.includes("short") || content.includes("#shorts")) {
-    return "Shorts"
+    return "Compilação"
+  } else if (content.includes("gameplay") || content.includes("jogando")) {
+    return "Gameplay"
+  } else if (content.includes("review") || content.includes("análise")) {
+    return "Review"
+  } else if (content.includes("mod") || content.includes("modpack")) {
+    return "Mods"
+  } else if (content.includes("construção") || content.includes("build")) {
+    return "Construção"
+  } else if (content.includes("pvp") || content.includes("player vs player")) {
+    return "PVP"
+  } else if (content.includes("survival") || content.includes("sobrevivência")) {
+    return "Survival"
   } else {
     return "Minecraft"
   }
@@ -236,6 +262,35 @@ export async function fetchChannelStats(channelId: string) {
   }
 }
 
+// Melhorar a função de detecção de shorts
+export function isYoutubeShort(video: any): boolean {
+  // Verificar se o título ou descrição contém #shorts
+  if (video.title?.toLowerCase().includes("#shorts") || video.description?.toLowerCase().includes("#shorts")) {
+    return true
+  }
+
+  // Verificar se a categoria é Shorts
+  if (video.category === "Shorts") {
+    return true
+  }
+
+  // Verificar se o título começa com # e é curto (típico de shorts)
+  if (video.title?.startsWith("#") && video.title?.length < 30) {
+    return true
+  }
+
+  // Verificar proporção da thumbnail (se disponível)
+  if (video.thumbnailHeight && video.thumbnailWidth) {
+    const ratio = video.thumbnailHeight / video.thumbnailWidth
+    if (ratio > 1.5) {
+      // Formato vertical típico de shorts (1080x1920 tem ratio de 1.78)
+      return true
+    }
+  }
+
+  return false
+}
+
 // Função para formatar números grandes
 export function formatNumber(num: string | number) {
   const n = typeof num === "string" ? Number.parseInt(num) : num
@@ -293,10 +348,11 @@ export function getExampleVideos() {
       thumbnail: "/placeholder.svg?height=400&width=600",
       views: "171",
       likes: "24",
-      category: "Compilações",
+      category: "Compilação",
       date: "1 ano atrás",
       videoId: "dQw4w9WgXcQ",
       publishedAt: new Date().toISOString(),
+      isShort: false,
     },
     {
       id: "2",
@@ -305,10 +361,11 @@ export function getExampleVideos() {
       thumbnail: "/placeholder.svg?height=400&width=600",
       views: "342",
       likes: "56",
-      category: "Tutoriais",
+      category: "Tutorial",
       date: "8 meses atrás",
       videoId: "dQw4w9WgXcQ",
       publishedAt: new Date().toISOString(),
+      isShort: false,
     },
     {
       id: "3",
@@ -317,10 +374,11 @@ export function getExampleVideos() {
       thumbnail: "/placeholder.svg?height=400&width=600",
       views: "215",
       likes: "38",
-      category: "Minecraft",
+      category: "Gameplay",
       date: "6 meses atrás",
       videoId: "dQw4w9WgXcQ",
       publishedAt: new Date().toISOString(),
+      isShort: false,
     },
     {
       id: "4",
@@ -329,10 +387,11 @@ export function getExampleVideos() {
       thumbnail: "/placeholder.svg?height=400&width=600",
       views: "189",
       likes: "32",
-      category: "Tutoriais",
+      category: "Tutorial",
       date: "5 meses atrás",
       videoId: "dQw4w9WgXcQ",
       publishedAt: new Date().toISOString(),
+      isShort: false,
     },
     {
       id: "5",
@@ -341,10 +400,11 @@ export function getExampleVideos() {
       thumbnail: "/placeholder.svg?height=400&width=600",
       views: "276",
       likes: "45",
-      category: "Minecraft",
+      category: "Construção",
       date: "4 meses atrás",
       videoId: "dQw4w9WgXcQ",
       publishedAt: new Date().toISOString(),
+      isShort: false,
     },
     {
       id: "6",
@@ -353,10 +413,11 @@ export function getExampleVideos() {
       thumbnail: "/placeholder.svg?height=400&width=600",
       views: "124",
       likes: "19",
-      category: "Lives",
+      category: "Live",
       date: "3 meses atrás",
       videoId: "dQw4w9WgXcQ",
       publishedAt: new Date().toISOString(),
+      isShort: false,
     },
   ]
 }

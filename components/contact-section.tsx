@@ -94,41 +94,25 @@ export function ContactSection() {
                 </div>
               </div>
               <div className="flex justify-start gap-4 mt-4">
-                <Link
-                  href="https://www.youtube.com/@FenixPosts"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <Link href="https://www.youtube.com/@FenixPosts" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" size="icon" className="rounded-full border-zinc-800">
                     <Youtube className="h-4 w-4 text-red-500" />
                     <span className="sr-only">YouTube</span>
                   </Button>
                 </Link>
-                <Link
-                  href="https://www.twitch.tv/fenixposts"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <Link href="https://www.twitch.tv/fenixposts" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" size="icon" className="rounded-full border-zinc-800">
                     <Twitch className="h-4 w-4 text-purple-500" />
                     <span className="sr-only">Twitch</span>
                   </Button>
                 </Link>
-                <Link
-                  href="https://www.tiktok.com/@fenixposts"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <Link href="https://www.tiktok.com/@fenixposts" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" size="icon" className="rounded-full border-zinc-800">
                     <TikTokIcon className="h-4 w-4 text-cyan-400" />
                     <span className="sr-only">TikTok</span>
                   </Button>
                 </Link>
-                <Link
-                  href="https://www.instagram.com/fenixposts"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                <Link href="https://www.instagram.com/fenixposts" target="_blank" rel="noopener noreferrer">
                   <Button variant="outline" size="icon" className="rounded-full border-zinc-800">
                     <Instagram className="h-4 w-4 text-pink-500" />
                     <span className="sr-only">Instagram</span>
@@ -170,8 +154,8 @@ export function ContactSection() {
                   placeholder="Mensagem"
                 />
               </div>
-              <Button 
-                className="w-full bg-gradient-to-r from-red-500 via-orange-500 to-purple-600 hover:from-red-600 hover:via-orange-600 hover:to-purple-700 text-white" 
+              <Button
+                className="w-full bg-gradient-to-r from-red-500 via-orange-500 to-purple-600 hover:from-red-600 hover:via-orange-600 hover:to-purple-700 text-white"
                 type="submit"
               >
                 <Send className="mr-2 h-4 w-4" /> Enviar Mensagem

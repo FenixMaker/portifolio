@@ -3,12 +3,12 @@ import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
-import { Mail, Send, Youtube, Twitch, Instagram, Twitter } from "lucide-react"
-import TikTokIcon from "@/components/icons/tiktok-icon"
+import { Mail, Send } from "lucide-react"
+import { SocialIcons } from "@/components/social-icons"
 
 export default function ContactPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-zinc-900 text-white">
+    <div className="flex flex-col min-h-screen bg-gradient-to-b from-zinc-950 to-zinc-900 text-white">
       <header className="px-4 lg:px-6 h-16 flex items-center justify-between border-b border-zinc-800">
         <Link className="flex items-center justify-center gap-2" href="/">
           <Image src="/images/logo.png" alt="Fenix Posts Logo" width={32} height={32} />
@@ -24,14 +24,20 @@ export default function ContactPage() {
           <Link className="text-sm font-medium hover:text-red-500 transition-colors" href="/about">
             Sobre
           </Link>
-          <Link className="text-sm font-medium hover:text-red-500 transition-colors" href="/contact">
+          <Link className="text-sm font-medium text-red-500 transition-colors" href="/contact">
             Contato
           </Link>
         </nav>
       </header>
       <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
+        <section className="w-full py-12 md:py-24 lg:py-32 relative overflow-hidden">
+          {/* Animated background elements */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-1/4 -left-20 w-64 h-64 bg-red-500/10 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-1/4 -right-20 w-80 h-80 bg-purple-600/10 rounded-full blur-3xl"></div>
+          </div>
+
+          <div className="container px-4 md:px-6 relative z-10">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-orange-500 to-purple-600">
@@ -43,7 +49,7 @@ export default function ContactPage() {
               </div>
             </div>
             <div className="mx-auto grid max-w-5xl grid-cols-1 md:grid-cols-2 gap-8 mt-12">
-              <div className="space-y-6">
+              <div className="space-y-6 bg-zinc-900/50 p-6 rounded-lg border border-zinc-800">
                 <div className="flex items-center gap-3">
                   <Mail className="h-6 w-6 text-red-500" />
                   <div>
@@ -51,101 +57,39 @@ export default function ContactPage() {
                     <p className="text-sm text-zinc-400">zueracrafta2015@gmail.com</p>
                   </div>
                 </div>
-                <div className="flex items-center gap-3">
-                  <Youtube className="h-6 w-6 text-red-500" />
-                  <div>
-                    <h3 className="font-medium text-white">YouTube</h3>
-                    <a
-                      href="https://www.youtube.com/@FenixPosts"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-zinc-400 hover:text-red-500 transition-colors"
-                    >
-                      youtube.com/@FenixPosts
-                    </a>
-                  </div>
+                <div className="pt-4">
+                  <h3 className="font-medium text-white mb-3">Redes Sociais</h3>
+                  <SocialIcons iconSize={6} className="flex-wrap gap-6" />
                 </div>
-                <div className="flex items-center gap-3">
-                  <Twitch className="h-6 w-6 text-red-500" />
-                  <div>
-                    <h3 className="font-medium text-white">Twitch</h3>
-                    <a
-                      href="https://www.twitch.tv/fenixposts"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-zinc-400 hover:text-purple-500 transition-colors"
-                    >
-                      twitch.tv/fenixposts
-                    </a>
-                  </div>
-                </div>
-                <div className="flex items-center gap-3">
-                  <Instagram className="h-6 w-6 text-red-500" />
-                  <div>
-                    <h3 className="font-medium text-white">Instagram</h3>
-                    <a
-                      href="https://www.instagram.com/fenixposts"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-sm text-zinc-400 hover:text-pink-500 transition-colors"
-                    >
-                      instagram.com/fenixposts
-                    </a>
+                <div className="pt-4">
+                  <h3 className="font-medium text-white mb-3">Estatísticas do Canal</h3>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-zinc-900 p-4 rounded-lg border border-zinc-800">
+                      <p className="text-2xl font-bold text-white">3.87K</p>
+                      <p className="text-sm text-zinc-400">Inscritos</p>
+                    </div>
+                    <div className="bg-zinc-900 p-4 rounded-lg border border-zinc-800">
+                      <p className="text-2xl font-bold text-white">395</p>
+                      <p className="text-sm text-zinc-400">Vídeos</p>
+                    </div>
                   </div>
                 </div>
                 <div className="pt-4">
-                  <h3 className="font-medium text-white mb-3">Redes Sociais</h3>
-                  <div className="flex gap-4">
-                    <Link href="https://www.youtube.com/@FenixPosts" target="_blank" rel="noopener noreferrer">
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        className="border-zinc-700 bg-zinc-800/50 hover:bg-zinc-800 text-white"
-                      >
-                        <Youtube className="h-5 w-5 text-red-500" />
-                      </Button>
-                    </Link>
-                    <Link href="https://www.twitch.tv/fenixposts" target="_blank" rel="noopener noreferrer">
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        className="border-zinc-700 bg-zinc-800/50 hover:bg-zinc-800 text-white"
-                      >
-                        <Twitch className="h-5 w-5 text-purple-500" />
-                      </Button>
-                    </Link>
-                    <Link href="https://www.tiktok.com/@fenixposts" target="_blank" rel="noopener noreferrer">
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        className="border-zinc-700 bg-zinc-800/50 hover:bg-zinc-800 text-white"
-                      >
-                        <TikTokIcon className="h-5 w-5 text-cyan-400" />
-                      </Button>
-                    </Link>
-                    <Link href="https://www.instagram.com/fenixposts" target="_blank" rel="noopener noreferrer">
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        className="border-zinc-700 bg-zinc-800/50 hover:bg-zinc-800 text-white"
-                      >
-                        <Instagram className="h-5 w-5 text-pink-500" />
-                      </Button>
-                    </Link>
-                    <Link href="https://twitter.com/fenixposts" target="_blank" rel="noopener noreferrer">
-                      <Button
-                        variant="outline"
-                        size="icon"
-                        className="border-zinc-700 bg-zinc-800/50 hover:bg-zinc-800 text-white"
-                      >
-                        <Twitter className="h-5 w-5 text-blue-400" />
-                      </Button>
-                    </Link>
-                  </div>
+                  <h3 className="font-medium text-white mb-3">Horário de Atendimento</h3>
+                  <p className="text-sm text-zinc-400">
+                    Segunda a Sexta: 9h às 18h
+                    <br />
+                    Sábado: 10h às 14h
+                    <br />
+                    Domingo: Fechado
+                  </p>
                 </div>
               </div>
               <div className="space-y-4">
-                <form className="space-y-4">
+                <form className="space-y-4 bg-zinc-900/50 p-6 rounded-lg border border-zinc-800">
+                  <h3 className="text-xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-orange-500 to-purple-600">
+                    Envie uma Mensagem
+                  </h3>
                   <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div className="space-y-2">
                       <Input
@@ -184,6 +128,31 @@ export default function ContactPage() {
                     <Send className="mr-2 h-4 w-4" /> Enviar Mensagem
                   </Button>
                 </form>
+                <div className="bg-zinc-900/50 p-6 rounded-lg border border-zinc-800">
+                  <h3 className="text-xl font-bold mb-4">Perguntas Frequentes</h3>
+                  <div className="space-y-4">
+                    <div>
+                      <h4 className="font-medium text-white">Quais serviços você oferece?</h4>
+                      <p className="text-sm text-zinc-400">
+                        Ofereço serviços de edição de vídeo para conteúdo de games, incluindo edição de gameplays,
+                        highlights, intros, outros e efeitos especiais.
+                      </p>
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-white">Qual o prazo de entrega?</h4>
+                      <p className="text-sm text-zinc-400">
+                        O prazo varia de acordo com a complexidade do projeto, mas geralmente entre 3 a 7 dias úteis.
+                      </p>
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-white">Como funciona o processo de trabalho?</h4>
+                      <p className="text-sm text-zinc-400">
+                        Após o contato inicial, discutimos os detalhes do projeto, prazos e valores. Depois, você envia
+                        o material bruto e eu começo a edição.
+                      </p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -192,38 +161,7 @@ export default function ContactPage() {
       <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t border-zinc-800">
         <p className="text-xs text-zinc-400">© 2025 Fenix Posts. Todos os direitos reservados.</p>
         <div className="sm:ml-auto flex items-center gap-4">
-          <Link
-            href="https://www.youtube.com/@FenixPosts"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-zinc-400 hover:text-red-500 transition-colors"
-          >
-            <Youtube className="h-5 w-5" />
-          </Link>
-          <Link
-            href="https://www.twitch.tv/fenixposts"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-zinc-400 hover:text-purple-500 transition-colors"
-          >
-            <Twitch className="h-5 w-5" />
-          </Link>
-          <Link
-            href="https://www.tiktok.com/@fenixposts"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-zinc-400 hover:text-cyan-400 transition-colors"
-          >
-            <TikTokIcon className="h-5 w-5" />
-          </Link>
-          <Link
-            href="https://www.instagram.com/fenixposts"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-zinc-400 hover:text-pink-500 transition-colors"
-          >
-            <Instagram className="h-5 w-5" />
-          </Link>
+          <SocialIcons iconSize={5} />
         </div>
       </footer>
     </div>
